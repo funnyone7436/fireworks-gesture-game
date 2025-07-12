@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Firework Gesture Game</title>
+  <style>
+    body { margin:0; overflow:hidden; background:#000; }
+    #fireworks-container, #overlay {
+      position:absolute; top:0; left:0;
+      width:100vw; height:100vh;
+      pointer-events:none;
+    }
+
+	#introScreen {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100vw;
+	  height: 100vh;
+	  background: rgba(0, 0, 0, 0.85);
+	  color: white;
+	  z-index: 999;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  justify-content: flex-start; /* Push content to the top */
+	  padding-top: 20px; /* Adjust this value to move higher or lower */
+	  text-align: center;
+	}
+
+    #introScreen h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    #introScreen p, #introScreen ul {
+      max-width: 600px;
+      font-size: 1.2em;
+    }
+
+    #introScreen ul {
+      text-align: left;
+      padding: 0;
+      list-style: none;
+    }
+
+    #introScreen ul li::before {
+      content: "🎯 ";
+    }
+	
+	
+
+    #startGameBtn {
+      margin-top: 30px;
+      font-size: 1.2em;
+      padding: 10px 20px;
+      background: #0ff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+	
+  </style>
+
+  <!-- Dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.4/pose.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+</head>
+<body>
+  <div id="fireworks-container"></div>
+  <canvas id="overlay"></canvas>
+
+  <!-- UI overlay -->
+  <div id="uiOverlay" style="position:absolute; top:10px; left:10px; color:white; font-family:sans-serif; z-index:20;">
+    <div>⏱️ Time: <span id="timer">0.0</span></div>
+    <div>🎉 Bursts: <span id="score">0</span></div>
+    <label style="display:flex; align-items:center; margin-top:5px;">
+      <input type="checkbox" id="toggleProt" style="transform: scale(1.5);" />
+      <span style="margin-left:8px;">Show gesture dots</span>
+    </label>
+  </div>
+
+  <!-- Intro screen -->
+  <div id="introScreen">
+    <h1>🎆 Fireworks Gesture Game</h1>
+    <p>Use your hands to launch fireworks in the night sky! The faster you move, the bigger the blast!</p>
+    <ul>
+      <li>Wave both hands quickly to launch fireworks</li>
+      <li>Faster = more bursts</li>
+      <li>You have 2 minutes to rack up the score</li>
+      <li>Use checkbox to toggle green gesture dots</li>
+    </ul>
+	<p style="margin-top: 20px;"><strong>📸 Requirements:</strong><br>
+	- Webcam access<br>
+	- Use body and hand gestures clearly in view
+	</p>
+    <button id="startGameBtn">▶️ Start Game</button>
+	<div id="githubCredit" style="
+	  position: absolute;
+	  bottom: 60px;
+	  right: 60px;
+	  text-align: right;
+	  color: #fff;
+	  font-size: 14px;
+	">
+	  <p style="margin: 0;">🔐 No worries, just fun!</p>
+	  <a href="https://github.com/funnyone7436/Dance-with-Minecraft-block"
+		 target="_blank"
+		 style="color:#0ff; text-decoration:none;">
+		🔍 View the full source on GitHub
+	  </a>
+	</div>
+
+	
+  </div>
+
+  <!-- Your main script -->
+  <script src="main.js"></script>
+
+  <script>
+    document.getElementById('startGameBtn').addEventListener('click', () => {
+      document.getElementById('introScreen').style.display = 'none';
+    });
+  </script>
+</body>
+</html>
